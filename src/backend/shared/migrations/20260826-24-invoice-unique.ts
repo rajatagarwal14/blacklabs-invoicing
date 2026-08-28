@@ -55,7 +55,7 @@ export const up = async (db: DatabaseAdapter) => {
            FOREIGN KEY("clientId") REFERENCES clients("id"),
            FOREIGN KEY("currencyId") REFERENCES currencies("id"),
            FOREIGN KEY("convertedFromQuotationId") REFERENCES invoices("id"),
-           FOREIGN KEY ("bankId") REFERENCES banks("id")
+           FOREIGN KEY ("bankId") REFERENCES banks("id"),
            UNIQUE("businessId","invoiceFullNumber", "clientId", "invoiceType"),
            CHECK (
              (

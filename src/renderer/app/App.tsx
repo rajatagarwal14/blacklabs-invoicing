@@ -13,9 +13,12 @@ import { useAppDispatch, useAppSelector } from '../state/configureStore';
 import { addToast, removeToast, selectAllowed, selectIsLoading, selectToasts, setSettings } from '../state/pageSlice';
 import { AppLayout } from './AppLayout';
 import { DatabaseChooser } from './DatabaseChooser/DatabaseChooser';
+import { IS_MANAGED } from '../shared/config/brand';
 
 export const App: FC = () => {
-  const [dbReady, setDbReady] = useState<boolean>(false);
+  // In a managed deployment the server pins the database at boot, so there is
+  // nothing for the chooser to choose and it would only stall the first paint.
+  const [dbReady, setDbReady] = useState<boolean>(IS_MANAGED);
   const isLoading = useAppSelector(selectIsLoading);
   const toasts = useAppSelector(selectToasts);
   const isAllowedToLeave = useAppSelector(selectAllowed);
@@ -63,6 +66,10 @@ export const App: FC = () => {
       localStorage.setItem('lastUsedLanguage', settings.language);
     }
   }, [settings, dispatch]);
+
+  useEffect(() => {
+    if (IS_MANAGED) getSettings();
+  }, [getSettings]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 {
   "app": {
     "noItems": "Selected an item to view details",
-    "title": "Invoice Builder",
+    "title": "BlackLabs Invoicing",
     "version": "Version"
   },
   "ariaLabel": {
@@ -570,12 +570,13 @@
   "settingsMenuItems": {
     "descriptions": {
       "about": "Learn more about this app, its features.",
-      "buyMeCoffee": "Invoice Builder is maintained by a single developer. Your support keeps updates coming and new features rolling out! Be one of the first supporters and see your name in the app",
+      "builtOn": "View the upstream project",
       "customizeInvoice": "Invoice number prefix e.g.: INV, suffix.",
       "darkMode": "Switch between light and dark themes.",
       "export": "Export your data for backup or to use in other applications.",
       "import": "Import your data from other sources or backup files.",
       "languageFormat": "Language, Amount format, Date format.",
+      "openSourceLicenses": "The open source components this app is built on, and their licenses",
       "privacyPolicy": "Feel free to go through our privacy policy.",
       "share": "Share this app with your friends.",
       "support": "Report bugs or suggest improvements via GitHub.",
@@ -585,19 +586,19 @@
       "turnStyleProfiles": "Enable or disable style profile feature",
       "turnUBL": "Enable exporting invoices in UBL 2.1 XML compliant with PEPPOL BIS Billing 3.0",
       "turnXRechnung": "Enable exporting invoices in UBL 2.1 XML compliant with the German XRechnung 3.0 standard",
-      "tutorial": "Checkout guide on how to use application",
-      "wallOfFame": "View the supporters who have contributed to the app"
+      "tutorial": "Checkout guide on how to use application"
     },
     "importConfirmText": "Are you sure you want to import this JSON file? This action will erase your current database and replace it with the data from the backup. This cannot be undone.",
     "titles": {
       "about": "About",
-      "buyMeCoffee": "Buy me coffee",
+      "builtOn": "Built on open source",
       "checkForUpdate": "Check for update",
       "customizeInvoice": "Customize invoice",
       "darkMode": "Dark Mode",
       "export": "Export",
       "import": "Import",
       "languageFormat": "Language & Format",
+      "openSourceLicenses": "Open source licenses",
       "privacyPolicy": "Privacy policy",
       "share": "Share App",
       "support": "Support",
@@ -607,8 +608,7 @@
       "turnStyleProfiles": "Style profiles",
       "turnUBL": "UBL 2.1 (PEPPOL BIS Billing 3.0)",
       "turnXRechnung": "XRechnung (UBL 2.1)",
-      "tutorial": "Tutorial",
-      "wallOfFame": "Wall of fame"
+      "tutorial": "Tutorial"
     },
     "updateConfirmText": "A new version ({{newVersion}}) is ready. Restart now to update from {{currentVersion}}? You can cancel and update will apply on next launch."
   },

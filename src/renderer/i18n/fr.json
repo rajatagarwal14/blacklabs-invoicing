@@ -1,7 +1,7 @@
 {
   "app": {
     "noItems": "Sélectionnez un élément pour afficher les détails",
-    "title": "Invoice Builder",
+    "title": "BlackLabs Invoicing",
     "version": "Version"
   },
   "ariaLabel": {
@@ -570,12 +570,13 @@
   "settingsMenuItems": {
     "descriptions": {
       "about": "En savoir plus sur cette application et ses fonctionnalités.",
-      "buyMeCoffee": "Invoice Builder est maintenu par un développeur indépendant. Votre soutien permet de continuer les mises à jour et d’ajouter de nouvelles fonctionnalités ! Soyez l’un des premiers contributeurs et voyez votre nom apparaître dans l’application",
+      "builtOn": "Voir le projet d'origine",
       "customizeInvoice": "Préfixe de numéro de facture (ex.: INV), suffixe.",
       "darkMode": "Basculer entre les thèmes clair et sombre.",
       "export": "Exportez vos données pour sauvegarde ou utilisation ailleurs.",
       "import": "Importez vos données depuis d’autres sources ou fichiers de sauvegarde.",
       "languageFormat": "Langue, format des montants, format de date.",
+      "openSourceLicenses": "Les composants open source utilisés par cette application et leurs licences",
       "privacyPolicy": "Consultez notre politique de confidentialité.",
       "share": "Partagez cette application avec vos amis.",
       "support": "Signalez des bugs ou proposez des améliorations via GitHub.",
@@ -585,19 +586,19 @@
       "turnStyleProfiles": "Activer ou désactiver la fonction des profils de style",
       "turnUBL": "Activer l'export des factures au format XML UBL 2.1 conforme à PEPPOL BIS Billing 3.0",
       "turnXRechnung": "Activer l'exportation des factures en XML UBL 2.1 conforme à la norme allemande XRechnung 3.0",
-      "tutorial": "Consultez le guide d’utilisation",
-      "wallOfFame": "Découvrez les contributeurs qui ont soutenu le développement de l’application"
+      "tutorial": "Consultez le guide d’utilisation"
     },
     "importConfirmText": "Êtes-vous sûr de vouloir importer ce fichier JSON ? Cette action effacera votre base actuelle et la remplacera par les données de la sauvegarde. Cette action est irréversible.",
     "titles": {
       "about": "À propos",
-      "buyMeCoffee": "Offrez-moi un café",
+      "builtOn": "Basé sur l'open source",
       "checkForUpdate": "Vérifier les mises à jour",
       "customizeInvoice": "Personnaliser la facture",
       "darkMode": "Mode sombre",
       "export": "Exporter",
       "import": "Importer",
       "languageFormat": "Langue & Format",
+      "openSourceLicenses": "Licences open source",
       "privacyPolicy": "Politique de confidentialité",
       "share": "Partager l’application",
       "support": "Support",
@@ -607,8 +608,7 @@
       "turnStyleProfiles": "Profils de style",
       "turnUBL": "UBL 2.1 (PEPPOL BIS Billing 3.0)",
       "turnXRechnung": "XRechnung (UBL 2.1)",
-      "tutorial": "Tutoriel",
-      "wallOfFame": "Tableau d'honneur"
+      "tutorial": "Tutoriel"
     },
     "updateConfirmText": "Une nouvelle version ({{newVersion}}) est prête. Redémarrer maintenant pour mettre à jour depuis {{currentVersion}} ? Vous pouvez annuler et la mise à jour s’appliquera au prochain lancement."
   },

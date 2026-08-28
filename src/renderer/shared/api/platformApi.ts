@@ -34,6 +34,7 @@ import type {
 import type { Unit, UnitAdd, UnitUpdate } from '../types/unit';
 import type { ProgressInfo } from '../types/updater';
 import { base64ToBytes, toDataUrl } from '../utils/dataUrlFunctions';
+import { backupFileName } from '../config/brand';
 
 const fileToBase64 = async (file?: Uint8Array | null) => {
   if (!file) return null;
@@ -492,7 +493,7 @@ export const webApi = () => {
       const blob = new Blob([JSON.stringify(result.data, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `invoice-builder-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = backupFileName('json');
       a.click();
       URL.revokeObjectURL(a.href);
       return { success: true, data: { filePath: a.download } };

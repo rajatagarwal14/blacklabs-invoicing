@@ -42,3 +42,6 @@ data/*.db
 dist-fe
 dist-be
 dist-electron
+# BlackLabs managed deployments — contain credentials and client data
+deploy/clients/
+deploy/backups/

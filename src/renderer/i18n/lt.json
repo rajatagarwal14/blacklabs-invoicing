@@ -1,7 +1,7 @@
 {
   "app": {
     "noItems": "Pasirinkite elementą, kad peržiūrėtumėte informaciją",
-    "title": "Sąskaitų Kūrėjas",
+    "title": "BlackLabs Invoicing",
     "version": "Version"
   },
   "ariaLabel": {
@@ -570,12 +570,13 @@
   "settingsMenuItems": {
     "descriptions": {
       "about": "Sužinokite daugiau apie šią programą, jos funkcijas.",
-      "buyMeCoffee": "Invoice Builder prižiūri vienas kūrėjas. Jūsų parama padeda tęsti atnaujinimus ir diegti naujas funkcijas! Tapkite vienu iš pirmųjų rėmėjų ir pamatykite savo vardą programėlėje",
+      "builtOn": "Peržiūrėti pirminį projektą",
       "customizeInvoice": "Sąskaitos numerio priešdėlis (pvz.: INV), priesagas.",
       "darkMode": "Perjunkite tarp šviesios ir tamsios temų.",
       "export": "Eksportuokite savo duomenis atsarginei kopijai arba naudoti kitose programose.",
       "import": "Importuokite savo duomenis iš kitų šaltinių arba atsarginių kopijų.",
       "languageFormat": "Kalba, sumos formatas, datos formatas.",
+      "openSourceLicenses": "Atvirojo kodo komponentai, kuriais paremta ši programa, ir jų licencijos",
       "privacyPolicy": "Susipažinkite su mūsų privatumo politika apie tai, kaip tvarkome jūsų duomenis.",
       "share": "Bendrinkite šią programą su draugais.",
       "support": "Praneškite apie klaidas arba siūlykite patobulinimus per GitHub.",
@@ -585,19 +586,19 @@
       "turnStyleProfiles": "Įjungti arba išjungti stiliaus profilių funkciją",
       "turnUBL": "Įjunkti sąskaitų eksportą UBL 2.1 XML formatu, atitinkančiu PEPPOL BIS Billing 3.0",
       "turnXRechnung": "Įjungti sąskaitų eksportavimą UBL 2.1 XML formatu, atitinkančiu Vokietijos XRechnung 3.0 standartą",
-      "tutorial": "Peržiūrėkite gidą, kaip naudotis programa",
-      "wallOfFame": "Peržiūrėkite rėmėjus, kurie prisidėjo prie programėlės kūrimo"
+      "tutorial": "Peržiūrėkite gidą, kaip naudotis programa"
     },
     "importConfirmText": "Ar tikrai norite importuoti šį JSON failą? Šis veiksmas ištrins dabartinę duomenų bazę ir ją pakeis duomenimis iš atsarginės kopijos. Šio veiksmo atšaukti nebus galima.",
     "titles": {
       "about": "Apie",
-      "buyMeCoffee": "Nupirk man kavos",
+      "builtOn": "Sukurta atvirojo kodo pagrindu",
       "checkForUpdate": "Tikrinti atnaujinimus",
       "customizeInvoice": "Valdykite sąskaitą",
       "darkMode": "Tamsus režimas",
       "export": "Eksportuoti",
       "import": "Importuoti",
       "languageFormat": "Kalba ir formatas",
+      "openSourceLicenses": "Atvirojo kodo licencijos",
       "privacyPolicy": "Privatumo politika",
       "share": "Bendrinti programą",
       "support": "Pagalba",
@@ -607,8 +608,7 @@
       "turnStyleProfiles": "Stiliaus profiliai",
       "turnUBL": "UBL 2.1 (PEPPOL BIS Billing 3.0)",
       "turnXRechnung": "XRechnung (UBL 2.1)",
-      "tutorial": "Instrukcija",
-      "wallOfFame": "Garbės siena"
+      "tutorial": "Instrukcija"
     },
     "updateConfirmText": "Nauja versija ({{newVersion}}) paruošta. Perkrauti dabar, kad atnaujintumėte iš {{currentVersion}}? Atšaukę, atnaujinimas bus kitą kartą paleidus programą."
   },

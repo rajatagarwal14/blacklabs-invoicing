@@ -6,11 +6,24 @@ import { DatabaseType } from '../../shared/enums/databaseType';
 import { DBInitType } from '../../shared/enums/dbInitType';
 import { APP_CONFIG } from '../config';
 import { setupDB } from '../database';
+import { isManagedMode } from '../managed';
 import { listDbLimiter } from '../utils/functions';
 
 export const dbDir = path.resolve(process.cwd(), process.env.DB_DIRECTORY || APP_CONFIG.DB_DIRECTORY);
 
+/**
+ * These routes let the caller choose which database the server talks to, and
+ * POST /api/databases will delete and recreate a SQLite file when no mode is
+ * given. That is acceptable for a local desktop app and unacceptable for a
+ * hosted one, so managed mode refuses to register them even if called by
+ * mistake. Registration happens in main.ts only when managed mode is off.
+ */
 export const initDatabaseController = (app: Express) => {
+  if (isManagedMode()) {
+    console.warn('Managed mode: database selection routes not registered.');
+    return;
+  }
+
   app.get('/api/databases', listDbLimiter, async (_req: Request, res: Response) => {
     try {
       const files = await fsPromise.readdir(dbDir);

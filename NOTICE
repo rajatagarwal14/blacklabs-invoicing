@@ -1,0 +1,13 @@
+BlackLabs Invoicing
+Copyright (c) 2026 BlackLabs
+
+This product is a derivative work of Invoice Builder
+(https://github.com/piratuks/invoice-builder), used under the MIT License:
+
+    Copyright (c) 2025 Evaldas L.
+
+The full MIT License text is in the LICENSE file, which is retained
+unmodified as that license requires. Removing it would breach the license.
+
+Modifications made by BlackLabs are described in docs/ and in the
+git history of this fork.

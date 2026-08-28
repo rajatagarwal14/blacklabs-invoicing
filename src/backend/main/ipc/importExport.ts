@@ -4,13 +4,14 @@ import { join } from 'path';
 import * as importExportService from '../../shared/services/importExport';
 import type { DatabaseAdapter } from '../../shared/types/DatabaseAdapter';
 import { mapDatabaseError } from '../../shared/utils/errorFunctions';
+import { APP_CONFIG } from '../config';
 
 export const initImportExportHandlers = (db: DatabaseAdapter) => {
   ipcMain.handle('export-all-data', async () => {
     try {
       const payload = await importExportService.exportAllData(db);
 
-      const defaultFileName = `invoice-builder-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      const defaultFileName = `${APP_CONFIG.BACKUP_PREFIX}-backup-${new Date().toISOString().slice(0, 10)}.json`;
       const result = await dialog.showSaveDialog({
         title: 'Export',
         defaultPath: join(process.env.USERPROFILE || process.cwd(), defaultFileName),

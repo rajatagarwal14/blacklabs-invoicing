@@ -1,13 +1,13 @@
-appId: com.invoice-builder
-productName: Invoice Builder
+appId: com.blacklabs.invoicing
+productName: BlackLabs Invoicing
 
 directories:
   output: release
 
 publish:
   provider: github
-  owner: piratuks
-  repo: invoice-builder
+  owner: blacklabs
+  repo: blacklabs-invoicing
 
 files:
   - dist-fe/**
@@ -37,7 +37,7 @@ linux:
     - deb
     - AppImage
   category: Office
-  maintainer: 'Piratuks <evaldiz@gmail.com>'
+  maintainer: 'BlackLabs <support@blacklabs.example>'
   icon: 'src/backend/main/assets/linux-icons'
 
 mac:

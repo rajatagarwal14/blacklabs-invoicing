@@ -1,0 +1,82 @@
+# Authenticating reverse proxy for BlackLabs Invoicing instances.
+#
+# The application has no login of its own. This file is the login. Everything
+# below 127.0.0.1 is unauthenticated, so the proxy must not be optional and
+# must not be bypassable — do not publish the instance ports themselves.
+#
+# Caddy obtains and renews TLS certificates automatically, so there is no
+# certificate management step. Copy this to /etc/caddy/Caddyfile, edit, then:
+#   caddy validate --config /etc/caddy/Caddyfile
+#   systemctl reload caddy
+
+{
+	email ops@blacklabs.example
+}
+
+# ---------------------------------------------------------------------------
+# Tier 1 — SSO via oauth2-proxy.  Recommended for anything real.
+#
+# Identity lives with your IdP (Google Workspace, Okta, Entra), so offboarding
+# a client's employee is a change in one place rather than in every instance.
+# Run one oauth2-proxy per client if clients must not share an allowed domain.
+# ---------------------------------------------------------------------------
+invoices.acme.com {
+	forward_auth 127.0.0.1:4180 {
+		uri /oauth2/auth
+		# Only these headers are copied back; anything else the auth service
+		# returns is discarded rather than reaching the app.
+		copy_headers X-Auth-Request-User X-Auth-Request-Email
+	}
+
+	handle /oauth2/* {
+		reverse_proxy 127.0.0.1:4180
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:8100
+	}
+
+	# The app renders untrusted invoice content into PDFs and never needs to
+	# reach a third-party origin, so lock the document down.
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		-Server
+	}
+
+	request_body {
+		# Logos and signatures are posted as base64 inside JSON; the backend
+		# accepts up to 50mb, so match it here rather than failing opaquely.
+		max_size 50MB
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Tier 2 — a shared password.  Acceptable only for a pilot with one client
+# who understands the trade-off. There is no per-user identity, so an
+# offboarded employee keeps access until someone rotates the password, and
+# nothing in the logs distinguishes one person from another.
+#
+# Generate the hash with:  caddy hash-password
+# ---------------------------------------------------------------------------
+# invoices.pilot-client.com {
+# 	basic_auth {
+# 		pilot $2a$14$replace-this-with-the-output-of-caddy-hash-password
+# 	}
+# 	reverse_proxy 127.0.0.1:8101
+# }
+
+# ---------------------------------------------------------------------------
+# Tier 3 — Cloudflare Access. If you already run Cloudflare, this moves the
+# gate to the edge and the origin never needs a public address at all: run
+# cloudflared alongside the stack and point the tunnel at 127.0.0.1:<port>.
+# In that setup this file is not used; the Access policy is the gate.
+#
+# Whichever tier you pick, verify it from outside the host before handing
+# over the URL:
+#   curl -sS -o /dev/null -w '%{http_code}\n' https://invoices.acme.com/api/health
+# A 200 without authenticating means the gate is not in the request path.
+# Expect 302 (SSO), 401 (basic auth), or a Cloudflare Access challenge.
+# ---------------------------------------------------------------------------

@@ -22,6 +22,7 @@ import { DEFAULT_TABLE_FIELD_SORT_ORDERS } from '../../state/constant';
 import { addToast } from '../../state/pageSlice';
 import { InvoiceForm } from './Form/index';
 import { InvoicesPreview } from './Preview';
+import { DEFAULT_PAGE_FORMAT } from '../../shared/config/brand';
 
 interface Props {
   invoice?: Invoice;
@@ -112,7 +113,7 @@ const InvoiceFormComponent: FC<Props> = ({
               layout: LayoutType.classic,
               tableHeaderStyle: TableHeaderStyle.light,
               tableRowStyle: TableRowStyle.classic,
-              pageFormat: PageFormat.a4,
+              pageFormat: DEFAULT_PAGE_FORMAT as PageFormat,
               labelUpperCase: false,
               showQuantity: true,
               showUnit: true,

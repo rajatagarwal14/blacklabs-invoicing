@@ -22,6 +22,7 @@ import { MenuItemSettings } from '../../../shared/enums/menuItemSettings';
 import { Themes } from '../../../shared/enums/themes';
 import { useAppDispatch, useAppSelector } from '../../../state/configureStore';
 import { selectSettings, selectUpdateMessage, setUpdateMessage } from '../../../state/pageSlice';
+import { BRAND } from '../../../shared/config/brand';
 
 interface Props {
   onSelected?: (key: MenuItemSettings | undefined) => void;
@@ -197,7 +198,7 @@ export const Menu: FC<Props> = ({
           isSelected: false,
           isToggle: false,
           onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder');
+            getApi().openUrl(BRAND.websiteUrl);
           }
         },
         {
@@ -207,7 +208,7 @@ export const Menu: FC<Props> = ({
           isSelected: false,
           isToggle: false,
           onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder/blob/main/TUTORIAL.md');
+            getApi().openUrl(BRAND.docsUrl);
           }
         },
         {
@@ -217,7 +218,7 @@ export const Menu: FC<Props> = ({
           isSelected: false,
           isToggle: false,
           onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder/issues');
+            getApi().openUrl(BRAND.supportUrl);
           }
         },
         {
@@ -227,7 +228,7 @@ export const Menu: FC<Props> = ({
           isSelected: false,
           isToggle: false,
           onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder/blob/main/PRIVACY-POLICY.md');
+            getApi().openUrl(BRAND.privacyUrl);
           }
         },
         {
@@ -237,7 +238,7 @@ export const Menu: FC<Props> = ({
           isToggle: false,
           isSelected: false,
           onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder/blob/main/TERMS-OF-USE.md');
+            getApi().openUrl(BRAND.termsUrl);
           }
         }
       ]
@@ -266,32 +267,36 @@ export const Menu: FC<Props> = ({
     }
   ];
 
-  const appPromotion = [
-    {
-      items: [
+  // Upstream's donation funnel is inappropriate in a paid product. What replaces
+  // it is the attribution MIT expects us to carry, plus the licences screen.
+  const appPromotion = BRAND.creditUpstream
+    ? [
         {
-          text: t('settingsMenuItems.titles.buyMeCoffee'),
-          description: t('settingsMenuItems.descriptions.buyMeCoffee'),
-          icon: <CoffeeIcon />,
-          isToggle: false,
-          isSelected: false,
-          onClick: () => {
-            getApi().openUrl('https://www.buymeacoffee.com/evaldizi');
-          }
-        },
-        {
-          text: t('settingsMenuItems.titles.wallOfFame'),
-          description: t('settingsMenuItems.descriptions.wallOfFame'),
-          icon: <EmojiEventsIcon />,
-          isToggle: false,
-          isSelected: false,
-          onClick: () => {
-            getApi().openUrl('https://github.com/piratuks/invoice-builder/blob/main/SUPPORTERS.md');
-          }
+          items: [
+            {
+              text: t('settingsMenuItems.titles.openSourceLicenses'),
+              description: t('settingsMenuItems.descriptions.openSourceLicenses'),
+              icon: <EmojiEventsIcon />,
+              isToggle: false,
+              isSelected: false,
+              onClick: () => {
+                getApi().openUrl(BRAND.licensesUrl);
+              }
+            },
+            {
+              text: t('settingsMenuItems.titles.builtOn'),
+              description: `${BRAND.upstreamName} — ${BRAND.upstreamCopyright}`,
+              icon: <CoffeeIcon />,
+              isToggle: false,
+              isSelected: false,
+              onClick: () => {
+                getApi().openUrl(BRAND.upstreamUrl);
+              }
+            }
+          ]
         }
       ]
-    }
-  ];
+    : [];
 
   return (
     <>

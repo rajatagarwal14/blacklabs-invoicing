@@ -1,7 +1,7 @@
 {
   "app": {
     "noItems": "Element auswählen, um Details anzuzeigen",
-    "title": "Rechnungsersteller",
+    "title": "BlackLabs Invoicing",
     "version": "Version"
   },
   "ariaLabel": {
@@ -570,12 +570,13 @@
   "settingsMenuItems": {
     "descriptions": {
       "about": "Erfahren Sie mehr über diese App und ihre Funktionen.",
-      "buyMeCoffee": "Invoice Builder wird von einem einzelnen Entwickler gepflegt. Deine Unterstützung sorgt dafür, dass Updates und neue Funktionen weiterentwickelt werden! Sei einer der ersten Unterstützer und sieh deinen Namen in der App",
+      "builtOn": "Zum Upstream-Projekt",
       "customizeInvoice": "Rechnungsnummer-Präfix z.B.: INV, Suffix.",
       "darkMode": "Zwischen hellem und dunklem Design wechseln.",
       "export": "Exportieren Sie Ihre Daten zur Sicherung oder zur Verwendung in anderen Anwendungen.",
       "import": "Importieren Sie Ihre Daten aus anderen Quellen oder Sicherungsdateien.",
       "languageFormat": "Sprache, Betragsformat, Datumsformat.",
+      "openSourceLicenses": "Die Open-Source-Komponenten dieser App und ihre Lizenzen",
       "privacyPolicy": "Lesen Sie unsere Datenschutzrichtlinie.",
       "share": "Teilen Sie diese App mit Ihren Freunden.",
       "support": "Fehler melden oder Verbesserungen über GitHub vorschlagen.",
@@ -585,19 +586,19 @@
       "turnStyleProfiles": "Style-Profil-Funktion aktivieren oder deaktivieren",
       "turnUBL": "Export von Rechnungen im UBL 2.1 XML-Format aktivieren, konform mit PEPPOL BIS Billing 3.0",
       "turnXRechnung": "Aktivieren Sie den Export von Rechnungen im UBL 2.1 XML-Format gemäß dem deutschen XRechnung 3.0-Standard",
-      "tutorial": "Anleitung zur Verwendung der Anwendung ansehen",
-      "wallOfFame": "Sehen Sie die Unterstützer, die zur Entwicklung der App beigetragen haben"
+      "tutorial": "Anleitung zur Verwendung der Anwendung ansehen"
     },
     "importConfirmText": "Sind Sie sicher, dass Sie diese JSON-Datei importieren möchten? Diese Aktion löscht Ihre aktuelle Datenbank und ersetzt sie durch die Daten aus dem Backup. Dies kann nicht rückgängig gemacht werden.",
     "titles": {
       "about": "Über",
-      "buyMeCoffee": "Kauf mir einen Kaffee",
+      "builtOn": "Basiert auf Open Source",
       "checkForUpdate": "Nach Updates suchen",
       "customizeInvoice": "Rechnung anpassen",
       "darkMode": "Dunkelmodus",
       "export": "Exportieren",
       "import": "Importieren",
       "languageFormat": "Sprache & Format",
+      "openSourceLicenses": "Open-Source-Lizenzen",
       "privacyPolicy": "Datenschutzrichtlinie",
       "share": "App teilen",
       "support": "Support",
@@ -607,8 +608,7 @@
       "turnStyleProfiles": "Stilprofile",
       "turnUBL": "UBL 2.1 (PEPPOL BIS Billing 3.0)",
       "turnXRechnung": "XRechnung (UBL 2.1)",
-      "tutorial": "Anleitung",
-      "wallOfFame": "Ruhmeshalle"
+      "tutorial": "Anleitung"
     },
     "updateConfirmText": "Eine neue Version ({{newVersion}}) ist verfügbar. Jetzt neu starten, um von {{currentVersion}} zu aktualisieren? Sie können abbrechen und das Update wird beim nächsten Start angewendet."
   },
