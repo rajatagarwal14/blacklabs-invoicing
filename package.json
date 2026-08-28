@@ -1,10 +1,10 @@
 {
-  "name": "invoice-builder",
+  "name": "blacklabs-invoicing",
   "private": true,
   "version": "2.5.6",
   "type": "module",
-  "description": "Invoice and quotation builder desktop app with PDF export, designed for small businesses and freelancers. Create, manage, and export invoices and quotes easily using a local database in an Electron-based app.",
-  "author": "piratuks",
+  "description": "BlackLabs Invoicing — white-label invoicing and quoting, deployed as a managed per-client instance. Fork of piratuks/invoice-builder (MIT).",
+  "author": "BlackLabs",
   "keywords": [
     "invoice",
     "quotation",
@@ -18,7 +18,6 @@
     "desktop-app",
     "electron",
     "local-database",
-    "invoice-builder",
     "quotation-builder",
     "billing-software",
     "business-software",
@@ -29,24 +28,19 @@
     "xrechnung"
   ],
   "bugs": {
-    "url": "https://github.com/piratuks/invoice-builder/issues"
+    "url": "https://github.com/blacklabs/blacklabs-invoicing/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/piratuks/invoice-builder.git"
+    "url": "git+https://github.com/blacklabs/blacklabs-invoicing.git"
   },
   "license": "MIT",
   "scripts": {
-    "docker:build": "docker build -t invoice-builder .",
-    "docker:backup-data": "node scripts/backup-data.cjs",
-    "docker:remove-database": "node scripts/remove-db.cjs",
-    "docker:list-databases": "docker exec backend ls /data",
-    "docker:list-databases:single": "docker exec invoice-builder ls /data",
-    "docker:compose:up:single": "docker compose -f docker-compose.standalone.yml up -d",
-    "docker:compose:pull": "docker compose pull",
-    "docker:compose:build": "docker compose up -d --build",
-    "docker:compose:up": "docker compose up -d",
-    "docker:compose:down": "docker compose down -d",
+    "provision": "deploy/provision.sh",
+    "backup": "deploy/backup.sh",
+    "backup:all": "deploy/backup.sh --all",
+    "restore": "deploy/restore.sh",
+    "restore:verify": "deploy/restore.sh --verify",
     "dev": "npm run dev:clean:backend && concurrently \"npm:dev:react\" \"npm:dev:preload\" \"npm:dev:migrations\" \"npm:dev:electron\" \"npm:dev:electron:start:wait\"",
     "dev:clean:backend": "rimraf dist-be/backend",
     "dev:webserver": "set TS_NODE_PROJECT=tsconfig.webserver.json && npx tsx --watch src/backend/webserver/main.ts",

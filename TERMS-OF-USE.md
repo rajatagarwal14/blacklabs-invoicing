@@ -1,108 +1,69 @@
-# TERMS OF USE
+# TERMS OF USE — PLACEHOLDER, NOT YET VALID
 
-**Last updated:** 2025-11-18
+> **Do not ship this file to a client and do not publish it.**
+>
+> This is a scaffold marking work that must be done by counsel before BlackLabs
+> Invoicing is sold to anyone. It is not a terms of use document, and nothing in
+> it protects BlackLabs.
 
-Thank you for using **Invoice Builder** (“the Application”). These Terms of Use (“Terms”) govern your access to and use of this software. By downloading, installing, or using the Application, you agree to these Terms.
+## Why upstream's terms were removed rather than rebranded
 
-If you do not agree with these Terms, you must not use the Application.
+This project is a fork of [Invoice Builder](https://github.com/piratuks/invoice-builder).
+Upstream's TERMS-OF-USE described a free, offline, single-user desktop
+application, and stated among other things:
 
----
+- that the application is "free, open-source desktop software"
+- that "all data is stored locally on the user's machine"
+- that "no data is transmitted to the developer or any third party"
+- that the developer's total liability is limited to **USD $0**
 
-## 1. Overview
+Every one of those statements is false for a BlackLabs-hosted instance.
+BlackLabs runs the server, holds the database, takes backups, and charges money
+for it. Rebranding that document would have meant shipping a customer-facing
+legal notice that misdescribes the product, so it was deleted instead. An
+obviously-missing document is safer than a quietly wrong one.
 
-The Application is a free, open-source desktop software tool that allows users to create and manage invoices, quotations, clients, items, and businesses. All data is stored locally on the user’s machine. No data is transmitted to the developer or any third party.
+## What the real terms have to account for
 
----
+These are the facts about the deployment that counsel needs. They are engineering
+statements, not legal ones.
 
-## 2. License
+**BlackLabs is the operator, not a distributor.** The client does not install
+anything. BlackLabs provisions, hosts, patches and backs up the instance, so the
+liability upstream disclaimed now sits with BlackLabs.
 
-The Application’s source code is released under the **MIT**, which is included in this repository.
+**Data leaves the client's premises.** Each instance stores its database on
+BlackLabs infrastructure and backups are taken on a schedule and retained (30
+days by default). Say where that infrastructure is, who can reach it, how long
+copies persist, and what happens to them when a client leaves.
 
-These Terms govern _use of the compiled application_, not the underlying source code license.
+**The data is billing records.** Invoices, client names and addresses, bank
+details, and payment history. That is commercially sensitive and contains third
+parties' personal data — the client's customers, who never agreed to anything
+with BlackLabs. A data processing agreement is likely required, and US state
+privacy law may apply depending on where clients and their customers sit.
 
----
+**Authentication is external to the application.** Access is controlled by a
+proxy BlackLabs operates, not by a login inside the product. Who may hold
+credentials, and what happens when a client's employee leaves, needs stating —
+it is an operational commitment, not a product feature.
 
-## 3. Local Data Storage
+**The product does not guarantee tax or regulatory correctness.** It computes
+what it is told to compute. Sales-tax rates are entered by the client; there is
+no jurisdiction lookup and no nexus logic. Responsibility for correct invoices
+stays with the client and this must be explicit.
 
-The Application stores all files, databases, and configuration data locally on your device.
+**Availability.** There is currently no SLA, no redundancy and no failover — a
+single container per client on a single host. Either commit to something
+achievable or state plainly that no uptime is guaranteed.
 
-- You are solely responsible for securely managing, backing up, and protecting your data.
-- The developer does not collect, store, or have access to any information you create using the Application.
-- If your data becomes lost or corrupted, the developer cannot recover it.
+**Restoration is possible but not instant.** Backups are verifiable and restore
+is scripted, but recovery is manual. Do not promise an RPO or RTO that has not
+been measured.
 
----
+## Related
 
-## 4. No Account, No Cloud Services
-
-The Application does not require an account and does not connect to any external servers operated by the developer.
-
-Exporting, printing, or storing files on third-party services (e.g., Dropbox, OneDrive, printers, PDF tools) is done at your own risk and is governed by those services’ policies.
-
----
-
-## 5. Your Responsibilities
-
-You agree that:
-
-- You will use the Application in compliance with all applicable laws and regulations (including tax, invoicing, and business laws in your region).
-- You are responsible for verifying the accuracy of any invoices, quotations, or reports generated by the Application.
-- You will not use the Application for illegal or unauthorized purposes.
-
----
-
-## 6. Disclaimer of Warranty
-
-THE APPLICATION IS PROVIDED “AS IS” AND “AS AVAILABLE,” WITHOUT WARRANTY OF ANY KIND.
-
-To the fullest extent permitted by law, the developer disclaims all warranties, whether express or implied, including but not limited to:
-
-- warranties of merchantability
-- fitness for a particular purpose
-- non-infringement
-- accuracy, reliability, or completeness of generated documents
-
-Use the Application at your own risk.
-
----
-
-## 7. Limitation of Liability
-
-To the maximum extent permitted by law:
-
-- The developer shall **not** be liable for any direct, indirect, incidental, special, exemplary, or consequential damages arising from or connected to your use or inability to use the Application.
-- This includes, but is not limited to, loss of revenue, loss of data, business interruption, or legal consequences of incorrect invoicing.
-
-If applicable law does not allow full limitation of liability, the developer’s total liability shall not exceed **USD $0**.
-
----
-
-## 8. Updates and Changes
-
-The developer may update, modify, or discontinue the Application at any time without notice.
-
-These Terms may also be updated. Continued use of the Application after changes are posted constitutes acceptance of the revised Terms.
-
----
-
-## 9. Third-Party Libraries
-
-The Application uses open-source dependencies under their respective licenses. You agree to comply with those licenses when using or redistributing this software.
-
----
-
-## 10. Open-Source Contributions
-
-Contributions to the project are welcome. By submitting code, issues, or documentation, you agree to the project’s contribution guidelines and licensing terms.
-
----
-
-## 11. Governing Law
-
-These Terms shall be governed by and interpreted according to the laws of **Lithuanian**, without regard to conflict-of-law provisions.
-
----
-
-## 12. Contact
-
-If you have questions about these Terms, please contact:  
-**[piratuks](https://github.com/piratuks)**
+- `LICENSE` — upstream's MIT licence, retained unmodified as that licence requires.
+- `NOTICE` — attribution for the upstream work.
+- `PRIVACY-POLICY.md` — same status as this file.
+- `deploy/README.md` — what the deployment actually does.
