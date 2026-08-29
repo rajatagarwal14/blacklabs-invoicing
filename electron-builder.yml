@@ -6,7 +6,7 @@ directories:
 
 publish:
   provider: github
-  owner: blacklabs
+  owner: rajatagarwal14
   repo: blacklabs-invoicing
 
 files:

@@ -28,11 +28,11 @@
     "xrechnung"
   ],
   "bugs": {
-    "url": "https://github.com/blacklabs/blacklabs-invoicing/issues"
+    "url": "https://github.com/rajatagarwal14/blacklabs-invoicing/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blacklabs/blacklabs-invoicing.git"
+    "url": "git+https://github.com/rajatagarwal14/blacklabs-invoicing.git"
   },
   "license": "MIT",
   "scripts": {
