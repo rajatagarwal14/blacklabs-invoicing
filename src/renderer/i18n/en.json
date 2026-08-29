@@ -569,7 +569,7 @@
   },
   "settingsMenuItems": {
     "descriptions": {
-      "about": "Learn more about this app, its features.",
+      "about": "Terms of use and product information.",
       "builtOn": "View the upstream project",
       "customizeInvoice": "Invoice number prefix e.g.: INV, suffix.",
       "darkMode": "Switch between light and dark themes.",
@@ -578,8 +578,8 @@
       "languageFormat": "Language, Amount format, Date format.",
       "openSourceLicenses": "The open source components this app is built on, and their licenses",
       "privacyPolicy": "Feel free to go through our privacy policy.",
-      "share": "Share this app with your friends.",
-      "support": "Report bugs or suggest improvements via GitHub.",
+      "share": "Share this app with a colleague.",
+      "support": "Report a problem or request a change.",
       "turnPresets": "Enable or disable the presets feature",
       "turnQuotes": "Enable or disable quote creation feature",
       "turnReports": "Enable or disable reporting feature",

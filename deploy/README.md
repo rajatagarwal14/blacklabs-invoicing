@@ -37,6 +37,22 @@ Then, in order:
 
 4. Add the client to the backup schedule.
 
+## Local demo (no Docker)
+
+```bash
+./demo-local.sh --brand-name "Acme Billing"   # start, then open the printed URL
+./demo-local.sh --reset                       # start from an empty database
+./demo-local.sh --stop
+```
+
+Same application, same managed mode, same US defaults — only the packaging
+differs: node processes instead of containers, with `scripts/demo-proxy.cjs`
+standing in for the nginx container so the frontend and API share one origin
+(which is how the production image is built).
+
+Loopback only, and **no proxy gate is set up**, so this has no authentication
+at all. Fine on a laptop for a demo; never on a shared or public host.
+
 ## Backups
 
 ```bash

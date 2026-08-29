@@ -569,7 +569,7 @@
   },
   "settingsMenuItems": {
     "descriptions": {
-      "about": "Erfahren Sie mehr über diese App und ihre Funktionen.",
+      "about": "Nutzungsbedingungen und Produktinformationen.",
       "builtOn": "Zum Upstream-Projekt",
       "customizeInvoice": "Rechnungsnummer-Präfix z.B.: INV, Suffix.",
       "darkMode": "Zwischen hellem und dunklem Design wechseln.",
@@ -578,8 +578,8 @@
       "languageFormat": "Sprache, Betragsformat, Datumsformat.",
       "openSourceLicenses": "Die Open-Source-Komponenten dieser App und ihre Lizenzen",
       "privacyPolicy": "Lesen Sie unsere Datenschutzrichtlinie.",
-      "share": "Teilen Sie diese App mit Ihren Freunden.",
-      "support": "Fehler melden oder Verbesserungen über GitHub vorschlagen.",
+      "share": "Diese App mit Kollegen teilen.",
+      "support": "Ein Problem melden oder eine Änderung anfragen.",
       "turnPresets": "Die Preset‑Funktion aktivieren oder deaktivieren",
       "turnQuotes": "Angebotserstellung aktivieren oder deaktivieren",
       "turnReports": "Berichtsfunktion aktivieren oder deaktivieren",

@@ -569,7 +569,7 @@
   },
   "settingsMenuItems": {
     "descriptions": {
-      "about": "En savoir plus sur cette application et ses fonctionnalités.",
+      "about": "Conditions d'utilisation et informations produit.",
       "builtOn": "Voir le projet d'origine",
       "customizeInvoice": "Préfixe de numéro de facture (ex.: INV), suffixe.",
       "darkMode": "Basculer entre les thèmes clair et sombre.",
@@ -578,8 +578,8 @@
       "languageFormat": "Langue, format des montants, format de date.",
       "openSourceLicenses": "Les composants open source utilisés par cette application et leurs licences",
       "privacyPolicy": "Consultez notre politique de confidentialité.",
-      "share": "Partagez cette application avec vos amis.",
-      "support": "Signalez des bugs ou proposez des améliorations via GitHub.",
+      "share": "Partager cette application avec un collègue.",
+      "support": "Signaler un problème ou demander une modification.",
       "turnPresets": "Activer ou désactiver la fonctionnalité des presets",
       "turnQuotes": "Activer ou désactiver la création de devis",
       "turnReports": "Activer ou désactiver les rapports",

@@ -569,7 +569,7 @@
   },
   "settingsMenuItems": {
     "descriptions": {
-      "about": "Sužinokite daugiau apie šią programą, jos funkcijas.",
+      "about": "Naudojimo sąlygos ir informacija apie produktą.",
       "builtOn": "Peržiūrėti pirminį projektą",
       "customizeInvoice": "Sąskaitos numerio priešdėlis (pvz.: INV), priesagas.",
       "darkMode": "Perjunkite tarp šviesios ir tamsios temų.",
@@ -578,8 +578,8 @@
       "languageFormat": "Kalba, sumos formatas, datos formatas.",
       "openSourceLicenses": "Atvirojo kodo komponentai, kuriais paremta ši programa, ir jų licencijos",
       "privacyPolicy": "Susipažinkite su mūsų privatumo politika apie tai, kaip tvarkome jūsų duomenis.",
-      "share": "Bendrinkite šią programą su draugais.",
-      "support": "Praneškite apie klaidas arba siūlykite patobulinimus per GitHub.",
+      "share": "Pasidalinti programa su kolega.",
+      "support": "Pranešti apie problemą arba paprašyti pakeitimo.",
       "turnPresets": "Įjunkti arba išjungti šablonų funkciją",
       "turnQuotes": "Įjunkti arba išjungti pasiūlymų kūrimo funkciją",
       "turnReports": "Įjunkti arba išjungti ataskaitų teikimo funkciją",

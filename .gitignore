@@ -45,3 +45,4 @@ dist-electron
 # BlackLabs managed deployments — contain credentials and client data
 deploy/clients/
 deploy/backups/
+.demo/
