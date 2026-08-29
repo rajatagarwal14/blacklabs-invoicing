@@ -1,6 +1,8 @@
 import { Box } from '@mui/material';
 import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import { DEMO_TOUR } from '../shared/config/brand';
+import { DemoTour } from './DemoTour/DemoTour';
 import { Sidebar } from './Sidebar';
 import { Updater } from './Updater';
 
@@ -14,6 +16,7 @@ export const AppLayout: FC = () => {
           <Outlet />
         </Box>
       </Box>
+      {DEMO_TOUR && <DemoTour />}
     </>
   );
 };

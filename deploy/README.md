@@ -41,7 +41,7 @@ Then, in order:
 
 ```bash
 ./demo-local.sh --brand-name "Acme Billing"   # start, then open the printed URL
-./demo-local.sh --reset                       # start from an empty database
+./demo-local.sh --reset --seed                # start clean, filled with demo data
 ./demo-local.sh --stop
 ```
 
@@ -49,6 +49,20 @@ Same application, same managed mode, same US defaults — only the packaging
 differs: node processes instead of containers, with `scripts/demo-proxy.cjs`
 standing in for the nginx container so the frontend and API share one origin
 (which is how the production image is built).
+
+`--seed` fills the instance with a fictional US design studio: a business with
+bank details, five clients, a rate card, fifteen invoices spread across paid,
+part-paid, overdue and current, and three open quotes. Enough that the invoice
+list, the client records and the financial dashboard all show something. It
+refuses to run twice against the same database unless given `--force`.
+
+The demo build also enables a **Play demo** button, bottom-left. It drives the
+real application through an eleven-step narrated walkthrough — navigating the
+actual screens, not a mockup — with play/pause, next/previous, and keyboard
+control (space, arrows, escape). Useful for a sales demo or for handing a
+client something to click through on their own. It is a build-time flag
+(`VITE_DEMO_TOUR`), off by default, so a client's production instance never
+ships it.
 
 Loopback only, and **no proxy gate is set up**, so this has no authentication
 at all. Fine on a laptop for a demo; never on a shared or public host.

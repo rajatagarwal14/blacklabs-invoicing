@@ -3,7 +3,7 @@
 # Run a branded managed instance locally, without Docker, for a demo.
 #
 #   ./demo-local.sh                     # start
-#   ./demo-local.sh --reset             # start from an empty database
+#   ./demo-local.sh --reset --seed      # start clean, filled with demo data
 #   ./demo-local.sh --brand-name "Acme Billing"
 #   ./demo-local.sh --stop
 #
@@ -26,6 +26,7 @@ DB_PATH="$DEMO_DIR/invoicing.sqlite"
 
 BRAND_NAME="BlackLabs Invoicing"
 RESET=0
+SEED=0
 STOP=0
 
 die() { echo "error: $*" >&2; exit 1; }
@@ -34,6 +35,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --brand-name) BRAND_NAME="${2:?--brand-name needs a value}"; shift 2 ;;
     --reset)      RESET=1; shift ;;
+    --seed)       SEED=1; shift ;;
     --stop)       STOP=1; shift ;;
     *) die "unknown option: $1" ;;
   esac
@@ -71,6 +73,7 @@ VITE_MANAGED_MODE=true \
 VITE_BRAND_NAME="$BRAND_NAME" \
 VITE_BRAND_WEBSITE_URL="http://127.0.0.1:$FRONT_PORT" \
 VITE_DEFAULT_PAGE_FORMAT=LETTER \
+VITE_DEMO_TOUR=true \
 npm run --prefix "$REPO" build:react >/dev/null
 
 echo "==> Building backend"
@@ -103,6 +106,11 @@ for _ in $(seq 1 30); do
   curl -s -o /dev/null "http://127.0.0.1:$FRONT_PORT/" 2>/dev/null && break
   sleep 1
 done
+
+if [[ "$SEED" -eq 1 ]]; then
+  echo "==> Seeding placeholder data"
+  node "$REPO/scripts/demo-seed.cjs" --url "http://127.0.0.1:$FRONT_PORT" | sed 's/^/    /'
+fi
 
 cat <<EOF
 

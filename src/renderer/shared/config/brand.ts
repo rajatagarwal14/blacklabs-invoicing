@@ -72,3 +72,9 @@ export const IS_MANAGED = flag('VITE_MANAGED_MODE', false);
  */
 export const DEFAULT_PAGE_FORMAT: 'A4' | 'LETTER' =
   text('VITE_DEFAULT_PAGE_FORMAT', 'LETTER').toUpperCase() === 'A4' ? 'A4' : 'LETTER';
+
+/**
+ * Guided demo player. Off by default so a client's production instance never
+ * ships a "Play demo" button; demo-local.sh turns it on.
+ */
+export const DEMO_TOUR = flag('VITE_DEMO_TOUR', false);
