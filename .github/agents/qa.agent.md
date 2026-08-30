@@ -1,6 +1,6 @@
 ---
 name: qa
-description: "Use this agent when reviewing a change for correctness, regressions, and verification in Invoice Builder."
+description: "Use this agent when reviewing a change for correctness, regressions, and verification in BlackLabs Invoicing."
 ---
 
 # QA agent

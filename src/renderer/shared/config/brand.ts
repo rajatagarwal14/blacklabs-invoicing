@@ -2,9 +2,7 @@
  * Single source of truth for white-label identity.
  *
  * Every customer-visible name, URL and filename prefix resolves here, so a
- * re-skin is an .env change rather than a search-and-replace across the tree.
- * Keeping the edits confined to this module is also what keeps `git merge
- * upstream/main` viable.
+ * re-skin is a config change rather than a search-and-replace across the tree.
  */
 
 const env = import.meta.env as Record<string, string | undefined>;
@@ -66,7 +64,7 @@ export const IS_MANAGED = flag('VITE_MANAGED_MODE', false);
 /**
  * Paper size for a new invoice.
  *
- * Upstream hardcodes A4. US clients need Letter, and getting this wrong is
+ * The default is Letter. US clients need it, and getting this wrong is
  * visible on the very first PDF a client generates. It is not a database
  * default — style_profiles starts empty and its pageFormat column is nullable
  * — so the value the invoice form seeds itself with IS the effective default.

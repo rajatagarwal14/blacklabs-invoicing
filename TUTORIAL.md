@@ -1,4 +1,4 @@
-# Invoice Builder Tutorial
+# BlackLabs Invoicing Tutorial
 
 > 💡 **Note:** The interface is fully responsive and works well on resizable windows, making it suitable for users on Linux tiling window managers, small screens, or any desktop setup.
 

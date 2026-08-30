@@ -1,6 +1,6 @@
 ---
 name: scrum
-description: "Use this agent when you need lightweight sprint planning, daily execution focus, and blockers tracking for Invoice Builder."
+description: "Use this agent when you need lightweight sprint planning, daily execution focus, and blockers tracking for BlackLabs Invoicing."
 ---
 
 # Scrum agent

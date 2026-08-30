@@ -1,10 +1,10 @@
 /**
  * BlackLabs managed mode.
  *
- * Upstream ships a "pick your own database" model: the browser tells the server
- * which SQLite file or Postgres server to connect to. That is correct for a
- * laptop app and unsafe for a hosted one, so managed mode replaces it with a
- * single database pinned by environment configuration at boot.
+ * The desktop build lets the browser choose its own database — which SQLite
+ * file or Postgres server to connect to. That is correct for an app running on
+ * your own machine and unsafe for a hosted one, so managed mode replaces it
+ * with a single database pinned by environment configuration at boot.
  *
  * When BLACKLABS_MANAGED is on:
  *   - the database is opened once, at startup, from env vars
@@ -25,7 +25,7 @@ const truthy = (value?: string) => {
 export const isManagedMode = (): boolean => truthy(process.env.BLACKLABS_MANAGED);
 
 /**
- * Postgres identifiers are restricted to [A-Za-z0-9_] upstream (sanitizeDatabaseName),
+ * Postgres identifiers are restricted to [A-Za-z0-9_] by sanitizeDatabaseName,
  * so a DATABASE_URL carrying a dashed database name fails late and cryptically.
  * Catching it here turns that into a startup error naming the offending value.
  */
@@ -106,8 +106,8 @@ export type ManagedTarget = { engine: 'postgres'; description: string } | { engi
 /**
  * Which engine this instance runs on.
  *
- * SQLite is the default because it is upstream's tested path: all 26
- * migrations apply cleanly against it. The Postgres migration chain does not
+ * SQLite is the default because it is the tested path: all 26 migrations apply
+ * cleanly against it. The Postgres migration chain does not
  * yet complete — see docs/POSTGRES-STATUS.md — so Postgres must be opted into
  * explicitly rather than picked up from a stray DATABASE_URL.
  */

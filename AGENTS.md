@@ -1,4 +1,4 @@
-# Agent workflow for Invoice Builder
+# Agent workflow for BlackLabs Invoicing
 
 This repository follows a lightweight BMAD-style workflow for coding tasks.
 

@@ -1,6 +1,6 @@
 ---
 name: dev
-description: "Use this agent when implementing a feature, bug fix, or refactor in the Invoice Builder codebase."
+description: "Use this agent when implementing a feature, bug fix, or refactor in the BlackLabs Invoicing codebase."
 ---
 
 # Dev agent

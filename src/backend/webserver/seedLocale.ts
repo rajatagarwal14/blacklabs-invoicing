@@ -1,12 +1,12 @@
 /**
  * US locale defaults for freshly provisioned instances.
  *
- * Upstream seeds for a European default: A4 paper, and a unit/category list
- * aimed at goods. A US client opening the app for the first time should not
- * have to fix paper size and invent categories before their first invoice.
+ * The base schema seeds for a European default: A4 paper, and a unit/category
+ * list aimed at goods. A US client opening the app for the first time should
+ * not have to fix paper size and invent categories before their first invoice.
  *
- * This runs as a separate step rather than as an edit to shared/db/setup.ts,
- * so upstream's seed logic stays mergeable.
+ * This runs as a separate step rather than as an edit to shared/db/setup.ts, so
+ * the base seed logic stays independent of locale.
  *
  * Applies only to an untouched instance — an install with any invoice, client
  * or business in it has been configured by its owner, and those choices are
@@ -49,9 +49,9 @@ export const seedUsDefaults = async (db: DatabaseAdapter): Promise<boolean> => {
   // profiles built against A4.
   await db.run(`UPDATE style_profiles SET "pageFormat" = ?`, [PageFormat.letter]);
 
-  // Upstream's settings defaults are already en-US and MM/dd/yyyy; set them
-  // explicitly anyway so a future upstream change to those defaults cannot
-  // silently alter what US clients get.
+  // The schema defaults are already en-US and MM/dd/yyyy; set them explicitly
+  // anyway so a future change to those defaults cannot silently alter what US
+  // clients get.
   await db.run(`UPDATE settings SET "amountFormat" = ?, "dateFormat" = ?, "language" = ?`, [
     'en-US',
     'MM/dd/yyyy',
@@ -66,7 +66,7 @@ export const seedUsDefaults = async (db: DatabaseAdapter): Promise<boolean> => {
 
 /**
  * BLACKLABS_SEED_LOCALE selects the pack. Only 'us' exists today; 'none'
- * disables seeding for a client who wants upstream's defaults untouched.
+ * disables seeding for a client who wants the schema defaults untouched.
  */
 export const applyLocaleSeed = async (db: DatabaseAdapter): Promise<void> => {
   const locale = (process.env.BLACKLABS_SEED_LOCALE ?? 'us').trim().toLowerCase();
@@ -84,6 +84,6 @@ export const applyLocaleSeed = async (db: DatabaseAdapter): Promise<void> => {
     // Seeding is a convenience. A client with a working database and European
     // paper size is a support ticket; a container that will not boot is an
     // outage. Log and carry on.
-    console.error('Locale seed failed; continuing with upstream defaults:', (err as Error).message);
+    console.error('Locale seed failed; continuing with schema defaults:', (err as Error).message);
   }
 };

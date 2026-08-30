@@ -95,8 +95,8 @@ restarts it after.
 
 ## Database engine
 
-SQLite, one file per instance. This is upstream's tested path — all 26
-migrations apply cleanly against it.
+SQLite, one file per instance. This is the tested path — all 26 migrations
+apply cleanly against it.
 
 Postgres is implemented but **does not work**: the migration chain fails partway
 through, and `--engine postgres` will produce an instance that cannot boot.
@@ -132,9 +132,10 @@ Backend runtime variables:
 ## What managed mode changes
 
 - `GET /api/databases`, `POST /api/databases` and `POST /api/databases/test` are
-  never registered. Upstream lets the browser name a Postgres host and connect
-  to it, and `POST /api/databases` with no `mode` **deletes and recreates** the
-  SQLite file. Those are reasonable on a laptop and unacceptable on a host.
+  never registered. Without managed mode the browser can name a Postgres host
+  and the server will connect to it, and `POST /api/databases` with no `mode`
+  **deletes and recreates** the SQLite file. Both are reasonable on a laptop
+  and unacceptable on a host.
 - The database is opened once at boot from environment configuration.
 - The frontend skips the database chooser.
 - `/api/health` returns 503 until the database is genuinely connected, so the
@@ -146,10 +147,8 @@ Backend runtime variables:
 ## Upgrading
 
 ```bash
-git fetch upstream && git merge upstream/main
 ./provision.sh <slug> <hostname>      # rebuild and restart in place
 ```
 
-Fork changes are deliberately confined to new files plus a short list of edits,
-to keep merges viable. Back up before upgrading: migrations run automatically at
-boot and there is no down-migration path.
+Back up before upgrading: migrations run automatically at boot and there is no
+down-migration path.

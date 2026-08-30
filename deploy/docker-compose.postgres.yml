@@ -1,6 +1,6 @@
 # One isolated BlackLabs Invoicing instance for one client.
 #
-# Differences from the upstream compose file:
+# Notes on this stack:
 #   - Postgres replaces the SQLite volume, so backup and restore are standard
 #     pg_dump/pg_restore rather than copying a file out of a running container.
 #   - The backend runs in managed mode: the database is pinned at boot and the

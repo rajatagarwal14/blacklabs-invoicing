@@ -1,6 +1,6 @@
 ---
 name: delivery
-description: "Use this agent when planning release scope, sequencing dependencies, and reducing delivery risk in Invoice Builder."
+description: "Use this agent when planning release scope, sequencing dependencies, and reducing delivery risk in BlackLabs Invoicing."
 ---
 
 # Delivery agent

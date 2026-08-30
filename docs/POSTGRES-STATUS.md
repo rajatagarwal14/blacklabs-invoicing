@@ -2,14 +2,13 @@
 
 **Status: not usable. SQLite is the supported engine for managed instances today.**
 
-The productization plan treated the Postgres adapter as a finished asset, on the
-strength of `pg` being a dependency, a `PostgresConfig` type existing, and
-`createPostgresAdapter` being implemented. Running it proved otherwise. The
+The Postgres adapter looks finished — `pg` is a dependency, `PostgresConfig`
+exists, `createPostgresAdapter` is implemented. Running it proves otherwise. The
 adapter is real, but the migration chain has never completed against Postgres,
 so no instance can reach a working schema.
 
 This was found by booting the backend against Postgres 14 and reading the server
-log — not by inspection. Anyone re-evaluating this should do the same rather
+log, not by reading the code. Anyone re-evaluating it should do the same rather
 than trusting the file listing.
 
 ## What was found
@@ -30,13 +29,13 @@ aborts the transaction. Fixed by adding the comma in:
 - `20260810-22-invoice-unique.ts`
 - `20260826-24-invoice-unique.ts`
 
-Worth sending upstream: it is a one-character fix and unambiguously a bug.
+A one-character fix, and unambiguously a bug.
 
 ### 2. `GENERATED ALWAYS AS IDENTITY` blocks the id copy — FIXED
 
 `getColumnType` mapped SQLite's `INTEGER PRIMARY KEY AUTOINCREMENT` to
-`INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY`. Nine migrations follow
-SQLite's rebuild-and-copy idiom — create `table_new`, `INSERT ... SELECT`
+`INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY`. Nine migrations follow SQLite's
+rebuild-and-copy idiom — create `table_new`, `INSERT ... SELECT`
 including `"id"`, swap — and Postgres rejects an explicit insert into a
 `GENERATED ALWAYS` column with `cannot insert a non-DEFAULT value into column
 "id"`.
@@ -78,21 +77,21 @@ Affected migrations:
 
 **A. Make the nine migrations dialect-aware.** On Postgres, use `ALTER TABLE`
 directly — `ALTER COLUMN ... TYPE`, `ADD/DROP CONSTRAINT` — instead of
-rebuild-and-swap. SQLite keeps its current path. This is correct, contributable
-upstream, and the only option that leaves the fork able to accept future
-upstream migrations without repeating the work. Estimate: 2–3 weeks including a
-migration test harness that runs the full chain against both engines.
+rebuild-and-swap. SQLite keeps its current path. This is the correct fix and the
+only one that does not have to be repeated for every future migration written in
+the SQLite idiom. Estimate: 2–3 weeks including a migration test harness that
+runs the full chain against both engines.
 
 **B. Baseline a consolidated Postgres schema.** Generate the final
 post-migration schema as a single `CREATE`, apply it to new Postgres instances,
 and mark all 26 migrations as already applied. Roughly 3–5 days, and it works
 because managed instances always start empty. It does not solve the problem:
-every future upstream migration written in the SQLite idiom will fail the same
-way, so this buys time rather than fixing anything.
+every future migration written in the SQLite idiom will fail the same way, so
+this buys time rather than fixing anything.
 
-**C. Ship on SQLite.** One database file per client instance, which is what
-upstream tests and what the desktop app has always used. This is the current
-default and it demonstrably works — see the verification below. The cost is
+**C. Ship on SQLite.** One database file per client instance, which is what the
+desktop build has always used and what the test suite exercises. This is the
+current default and it demonstrably works — see the verification below. The cost is
 that the Postgres tenancy runway is deferred, so Track B gets more expensive
 later, not less.
 

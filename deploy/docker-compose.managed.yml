@@ -1,8 +1,8 @@
 # One isolated BlackLabs Invoicing instance for one client, on SQLite.
 #
 # SQLite rather than Postgres because the Postgres migration chain does not
-# complete — see docs/POSTGRES-STATUS.md. This is upstream's tested path and
-# it works today. docker-compose.postgres.yml is the Postgres variant, kept
+# complete — see docs/POSTGRES-STATUS.md. SQLite is the tested path and it
+# works today. docker-compose.postgres.yml is the Postgres variant, kept
 # ready for when that chain is fixed.
 #
 # Isolation here is per-instance, not per-schema: each client gets its own

@@ -1,4 +1,4 @@
-# Copilot instructions for Invoice Builder
+# Copilot instructions for BlackLabs Invoicing
 
 Overview
 --------

@@ -7,10 +7,10 @@
  * does not advance the underlying sequence for explicitly supplied values — so
  * the next insert reuses id 1 and fails on the primary key.
  *
- * SQLite has no equivalent problem, which is why the upstream migrations do
- * not account for it. This runs once at boot, after migrations, and is cheap
- * and idempotent: for every identity column it sets the sequence to the
- * highest id present.
+ * SQLite has no equivalent problem, which is why the migrations do not account
+ * for it. This runs once at boot, after migrations, and is cheap and
+ * idempotent: for every identity column it sets the sequence to the highest id
+ * present.
  */
 import { DatabaseType } from '../shared/enums/databaseType';
 import type { DatabaseAdapter } from '../shared/types/DatabaseAdapter';

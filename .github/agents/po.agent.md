@@ -1,6 +1,6 @@
 ---
 name: po
-description: "Use this agent when you need product-owner scope, acceptance criteria, and prioritization for a task in Invoice Builder."
+description: "Use this agent when you need product-owner scope, acceptance criteria, and prioritization for a task in BlackLabs Invoicing."
 ---
 
 # PO agent
