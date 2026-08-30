@@ -1,0 +1,7 @@
+public/mockServiceWorker.js
+public/index.html
+public/**
+**/azure-pipelines.yml
+**/bitbucket-pipelines.yml
+*.yml
+.github/**

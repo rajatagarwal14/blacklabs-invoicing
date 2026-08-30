@@ -1,0 +1,57 @@
+appId: com.blacklabs.invoicing
+productName: BlackLabs Invoicing
+
+directories:
+  output: release
+
+publish:
+  provider: github
+  owner: rajatagarwal14
+  repo: blacklabs-invoicing
+
+files:
+  - dist-fe/**
+  - dist-be/**
+  - node_modules/**
+  - package.json
+
+extraMetadata:
+  main: dist-be/backend/main/main.cjs
+
+forceCodeSigning: false
+
+afterPack: scripts/after-pack.cjs
+
+win:
+  target:
+    - nsis
+
+nsis:
+  oneClick: true
+  perMachine: false
+  allowElevation: false
+  allowToChangeInstallationDirectory: false
+
+linux:
+  target:
+    - deb
+    - AppImage
+  category: Office
+  maintainer: 'BlackLabs <support@blacklabs.example>'
+  icon: 'src/backend/main/assets/linux-icons'
+
+mac:
+  target:
+    - dmg
+  category: public.app-category.productivity
+  icon: 'src/backend/main/assets/icon.icns'
+
+dmg:
+  contents:
+    - type: file
+      x: 130
+      y: 220
+    - type: link
+      x: 410
+      y: 220
+      path: /Applications

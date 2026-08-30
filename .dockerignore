@@ -1,0 +1,14 @@
+node_modules
+dist-fe
+dist-be
+release
+.git
+.github
+*.md
+!docs/DOCKER.md
+.vscode
+tutorial
+*.log
+.env
+.env.*
+.coverage

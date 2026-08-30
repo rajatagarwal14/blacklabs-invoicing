@@ -1,0 +1,92 @@
+# One isolated BlackLabs Invoicing instance for one client.
+#
+# Differences from the upstream compose file:
+#   - Postgres replaces the SQLite volume, so backup and restore are standard
+#     pg_dump/pg_restore rather than copying a file out of a running container.
+#   - The backend runs in managed mode: the database is pinned at boot and the
+#     /api/databases* selection routes are never registered.
+#   - Nothing is published on a public interface. The frontend binds to
+#     127.0.0.1 and an authenticating proxy in front of it terminates TLS and
+#     decides who gets through. The app has no authentication of its own —
+#     exposing this port directly to the internet publishes the client's
+#     billing records to anyone who finds it.
+#
+# Every value comes from the per-client .env written by provision.sh.
+
+name: ${CLIENT_SLUG}
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ${CLIENT_SLUG}-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+      # Deterministic collation keeps index behaviour identical across hosts,
+      # which matters when a dump is restored onto a different machine.
+      POSTGRES_INITDB_ARGS: '--encoding=UTF8 --locale=C'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${PGUSER} -d ${PGDATABASE}']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  backend:
+    image: ${IMAGE}
+    container_name: ${CLIENT_SLUG}-backend
+    restart: unless-stopped
+    environment:
+      SERVICE: backend
+      NODE_ENV: docker
+      PORT: '3000'
+      DEV_SERVER_URL: 0.0.0.0
+      FE_SERVER_URL: ${PUBLIC_URL}
+      MIGRATIONS_PATH: /app/dist-be/backend/server/shared/migrations
+      BLACKLABS_MANAGED: 'true'
+      PGHOST: db
+      PGPORT: '5432'
+      PGUSER: ${PGUSER}
+      PGPASSWORD: ${PGPASSWORD}
+      PGDATABASE: ${PGDATABASE}
+      PGSSL: 'false'
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      # /api/health returns 503 until the pinned database is connected, so this
+      # gates the frontend on a genuinely usable backend, not just an open port.
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "require('http').get('http://localhost:3000/api/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
+
+  frontend:
+    image: ${IMAGE}
+    container_name: ${CLIENT_SLUG}-frontend
+    restart: unless-stopped
+    # Loopback only. The authenticating proxy is the sole route in.
+    ports:
+      - '127.0.0.1:${HOST_PORT}:3001'
+    environment:
+      SERVICE: frontend
+      BACKEND_HOST: backend
+      BACKEND_PORT: '3000'
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  db-data:
+    name: ${CLIENT_SLUG}-db-data
