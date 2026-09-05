@@ -1,0 +1,70 @@
+name: Deploy demo to GitHub Pages
+
+# Publishes the static demo: the real frontend with an in-browser backend
+# (src/renderer/mocks/staticBackend.ts) standing in for the Node server, since
+# Pages serves static files only. Each visitor gets a private in-memory copy of
+# the seed data that resets on reload.
+
+on:
+  push:
+    branches: [blacklabs]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it midway, but queue at
+# most one more behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # --ignore-scripts skips electron-builder's postinstall and the sqlite3
+      # native build. Neither is needed for a frontend-only bundle, and both
+      # add minutes to every run.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Build static demo
+        env:
+          VITE_STATIC_DEMO: 'true'
+          VITE_MANAGED_MODE: 'true'
+          VITE_DEMO_TOUR: 'true'
+          VITE_DEFAULT_PAGE_FORMAT: LETTER
+          VITE_BRAND_NAME: BlackLabs Invoicing
+          VITE_BRAND_WEBSITE_URL: https://rajatagarwal14.github.io/blacklabs-invoicing/
+        run: npx vite build --outDir dist-pages
+
+      # Pages serves no rewrite rule, so a refresh on a deep path would 404.
+      # The app uses hash routing in this build, but copying index.html to
+      # 404.html makes even a mistyped path land on the app rather than a
+      # GitHub error page.
+      - name: Add 404 fallback
+        run: cp dist-pages/index.html dist-pages/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

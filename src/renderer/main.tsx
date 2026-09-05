@@ -27,6 +27,15 @@ import { store } from './state/configureStore';
 
 const mockEnabled = import.meta.env.VITE_ENABLE_MOCKS;
 
+/**
+ * Static demo build: no server, an in-memory backend, and hash routing.
+ *
+ * Hash routing because GitHub Pages has no rewrite rule — a deep link to
+ * /invoices would 404 against the static host, while /#/invoices is served by
+ * index.html and resolved client-side.
+ */
+const staticDemo = import.meta.env.VITE_STATIC_DEMO === 'true' || import.meta.env.VITE_STATIC_DEMO === true;
+
 const createRouter = () => {
   const routes = [
     {
@@ -56,10 +65,17 @@ const createRouter = () => {
     }
   ];
 
-  return isWebMode() ? createBrowserRouter(routes) : createHashRouter(routes);
+  return isWebMode() && !staticDemo ? createBrowserRouter(routes) : createHashRouter(routes);
 };
 
 const startApp = async () => {
+  if (staticDemo) {
+    // Must be installed before anything renders: the first screen fetches
+    // settings immediately.
+    const { installStaticBackend } = await import('./mocks/staticBackend');
+    installStaticBackend();
+  }
+
   if (mockEnabled === 'true' || mockEnabled === true) {
     try {
       const { worker } = await import('./mocks/browser');

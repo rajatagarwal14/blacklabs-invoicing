@@ -52,6 +52,17 @@ proxy is the login. It is not optional and must not be bypassable. See
 Building authentication into the product is the main work in a multi-tenant
 version and has not been done.
 
+## Live demo
+
+<https://rajatagarwal14.github.io/blacklabs-invoicing/>
+
+The real frontend with an in-browser backend standing in for the Node server,
+so it runs on static hosting. Every visitor gets a private copy of the sample
+data that resets on reload — nothing is shared and there is no server to
+attack, which matters because the application has no authentication of its
+own. PDF export, e-invoice XML and file import are server-side and therefore
+unavailable in that build.
+
 ## Local demo
 
 ```bash

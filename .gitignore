@@ -46,3 +46,4 @@ dist-electron
 deploy/clients/
 deploy/backups/
 .demo/
+dist-pages
