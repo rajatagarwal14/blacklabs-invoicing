@@ -24,8 +24,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useCallback, useEffect, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import blacklabLogo from '../assets/blacklab-logo.png';
 import { getApi } from '../shared/api/restApi';
 import { MenuList } from '../shared/components/lists/menuList/MenuList';
+import { BRAND } from '../shared/config/brand';
 import type { MenuItem } from '../shared/types/menuItem';
 import { useAppDispatch, useAppSelector } from '../state/configureStore';
 import { selectSettings, selectVersion, setVersion } from '../state/pageSlice';
@@ -272,13 +274,20 @@ export const Sidebar: FC = () => {
             minHeight: 64
           }}
         >
-          <Box sx={{ flexGrow: 1 }}></Box>
+          <Box sx={{ flexGrow: open ? 1 : 0 }}></Box>
+          <Box
+            component="img"
+            src={blacklabLogo}
+            alt={`${BRAND.name} logo`}
+            sx={{ width: 28, height: 28, borderRadius: '6px', flexShrink: 0 }}
+          />
           {open && (
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{
+                ml: 1,
                 color: theme.palette.primary.main
               }}
             >
