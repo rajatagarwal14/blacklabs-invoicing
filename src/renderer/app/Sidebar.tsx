@@ -31,7 +31,10 @@ import { BRAND } from '../shared/config/brand';
 import type { MenuItem } from '../shared/types/menuItem';
 import { useAppDispatch, useAppSelector } from '../state/configureStore';
 import { selectSettings, selectVersion, setVersion } from '../state/pageSlice';
-const DRAWER_WIDTH = 240;
+// Widened from 240px to make room for the logo mark added next to the title
+// (28px + margin). At 240px "BlackLabs Invoicing" clipped to "BlackLabs
+// Inv…" — measured 38px short — so this adds a small buffer past that.
+const DRAWER_WIDTH = 280;
 const COLLAPSED_WIDTH = 60;
 
 export const Sidebar: FC = () => {
@@ -274,27 +277,30 @@ export const Sidebar: FC = () => {
             minHeight: 64
           }}
         >
-          <Box sx={{ flexGrow: open ? 1 : 0 }}></Box>
           <Box
             component="img"
             src={blacklabLogo}
             alt={`${BRAND.name} logo`}
             sx={{ width: 28, height: 28, borderRadius: '6px', flexShrink: 0 }}
           />
-          {open && (
+          {open ? (
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{
                 ml: 1,
+                mr: 1,
+                flexGrow: 1,
+                minWidth: 0,
                 color: theme.palette.primary.main
               }}
             >
               {t(`app.title`)}
             </Typography>
+          ) : (
+            <Box sx={{ flexGrow: 1 }}></Box>
           )}
-          <Box sx={{ flexGrow: 1 }}></Box>
           <Tooltip title={t('ariaLabel.menu')}>
             <IconButton onClick={handleToggle} aria-label={t('ariaLabel.menu')}>
               {open ? <ChevronLeft /> : <ChevronRight />}
